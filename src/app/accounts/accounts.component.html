@@ -1,0 +1,67 @@
+<div class="page-content">
+  <h1>Manage Accounts</h1>
+  <div class="row">
+    <div class="col-sm-3">
+      <span *ngIf="showErrorMessage" style="color: red;">Please enter all the valid field</span>
+      <form #userForm="ngForm">
+        <input type="text" class="form-control" placeholder="Account Name" name="accountName"
+          [(ngModel)]="accountName"><br>
+        <textarea class="form-control" placeholder="Account Address" name="accountAddress"
+          [(ngModel)]="accountAddress"></textarea><br>
+        <input type="text" class="form-control" placeholder="PAN" name="pan" [(ngModel)]="pan"><br>
+        <input class="form-check-input" type="checkbox" value="applyGST" [(ngModel)]="applyGST" name="applyGST">
+        <label class="form-check-label" for="flexCheckDefault">
+          GST Applicable
+        </label>
+        <div *ngIf="applyGST">
+          <input type="text" class="form-control" placeholder="GST No." name="accountGST" [(ngModel)]="accountGSTNo">
+        </div><br>
+        <input type="text" class="form-control" placeholder="Account Number" name="accountNumber"
+          [(ngModel)]="accountNumber"><br>
+        <input type="text" class="form-control" placeholder="Bank Name" name="bankName" [(ngModel)]="bankName"><br>
+        <input type="text" class="form-control" placeholder="Bank Branch" name="bankBranch"
+          [(ngModel)]="bankBranch"><br>
+        <input type="text" class="form-control" placeholder="IFSC Code" name="ifscCode" [(ngModel)]="ifscCode"><br>
+        <button type="submit" (click)="submitAccountData(userForm)" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Account Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">PAN</th>
+            <th scope="col">GST No.</th>
+            <th scope="col">Bank Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of accountDataList">
+            <td>{{data.accountName}}</td>
+            <td>{{data.accountAddress}}</td>
+            <td>{{data.accountPAN}}</td>
+            <td>{{data.accountGSTNo}}</td>
+            <td><button class="btn btn-primary" (click)="open(content, data)">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{currentAccountName}}'s Bank Details</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="text" [disabled] = "true" class="form-control" placeholder="Account Number" [(ngModel)]="currentAccountNumber"><br>
+        <input type="text" [disabled] = "true" class="form-control" [(ngModel)] = "currentBankName"><br>
+        <input type="text" [disabled] = "true" class="form-control" placeholder="Bank Branch" [(ngModel)]="currentBankBranch"><br>
+        <input type="text" [disabled] = "true" class="form-control" placeholder="IFSC Code" [(ngModel)]="currentIfscCode"><br>
+    </div>
+  </ng-template>
+
+</div>

@@ -1,0 +1,23 @@
+body {
+    min-height: 100vh;
+}
+
+.vertical-nav {
+    min-width: 17rem;
+    width: 17rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-content{
+    margin-left: 18rem;
+    margin-top: 2rem;
+    width: calc(100% - 17rem);
+}
+
+/* #sidebar {
+    margin-left: -17rem;
+} */
